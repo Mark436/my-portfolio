@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    /* MODO CLARO */
+    --bg: #f9fafb;
+    --surface: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #111827;
+    --primary-fg: #f9fafb;
+    --accent: #84cc16; /* Verde lima */
+  }
+
+  .dark {
+    /* MODO OSCURO */
+    --bg: #09090b; 
+    --surface: #18181b;
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --border: #27272a;
+    --primary: #f4f4f5;
+    --primary-fg: #09090b;
+    --accent: #eab308; /* Amarillo */
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Animación de entrada para los proyectos */
+.fade-up-entry {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-up-entry.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up-entry { transition: none; opacity: 1; transform: none; }
+}
