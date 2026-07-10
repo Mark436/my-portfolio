@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 
 const NAV_ITEMS = [
-  { href: "#proyectos", content: "Proyectos muy largo larguisisisisisissiimo" },
+  { href: "#proyectos", content: "Proyectos" },
   { href: "#sobre-mi", content: "Sobre mi" },
   { href: "#skills", content: "Skills" },
 ];
@@ -85,22 +85,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         class="flex items-center p-1.5 bg-surface/80 backdrop-blur-xl border border-divider shadow-lg rounded-full transition-colors duration-300"
       >
         <ul class="flex items-center gap-1 px-2 list-none m-0 p-0">
-          <span
-            class="bg-primary/30 text-accent border border-divider shadow-sm"
-            id="indicator"></span>
           {
             NAV_ITEMS.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors w-fit duration-200 text-nowrap"
+                  /*bg-bg text-accent border border-divider shadow-sm estilos activo*/
+                  class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200"
                 >
                   {item.content}
                 </a>
               </li>
             ))
           }
-
+          
           <li>
             <div class="flex items-center">
               <span class="w-px h-5 bg-divider mx-2"></span>
@@ -138,8 +136,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </html>
 
 <script>
-  const $ = (selector: string) => document.querySelector(selector);
-
   document.addEventListener("astro:page-load", () => {
     const themeBtn = document.getElementById("theme-btn");
     themeBtn?.addEventListener("click", () => {
@@ -148,41 +144,4 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
   });
-  const enlaces = document.querySelectorAll("a");
-
-  enlaces.forEach((anchor) => {
-    anchor.addEventListener("mouseover", () => {
-      enlaces.forEach((enlace) => enlace.classList.remove("active-item"));
-      anchor.classList.add("active-item");
-    });
-  });
-  $("ul")?.addEventListener("mouseover", () => {
-    $("ul")?.classList.remove("active-item");
-  });
-  $("ul")?.addEventListener("mouseleave", () => {
-    enlaces.forEach((enlace) => enlace.classList.remove("active-item"));
-    $("ul")?.classList.add("active-item");
-  });
 </script>
-
-<style>
-  .active-item {
-    anchor-name: --active;
-    transition: all 500ms ease;
-  }
-  ul,
-  a {
-    transition: all 500ms ease;
-  }
-  #indicator {
-    transition: all 500ms ease;
-    position: absolute;
-    position-anchor: --active;
-    display: block;
-    border-radius: 1rem;
-    left: anchor(left);
-    top: anchor(top);
-    width: anchor-size(width);
-    height: anchor-size(height);
-  }
-</style>
