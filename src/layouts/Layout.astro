@@ -13,6 +13,12 @@ const {
   image = "/og-image.png",
 } = Astro.props;
 
+const NAV_ITEMS = [
+  { href: "#proyectos", content: "Proyectos" },
+  { href: "#sobre-mi", content: "Sobre mi" },
+  { href: "#skills", content: "Skills" },
+];
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -54,7 +60,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
 
-    <script is:inline>
+    <script>
       const theme = (() => {
         if (
           typeof localStorage !== "undefined" &&
@@ -79,30 +85,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         class="flex items-center p-1.5 bg-surface/80 backdrop-blur-xl border border-divider shadow-lg rounded-full transition-colors duration-300"
       >
         <ul class="flex items-center gap-1 px-2 list-none m-0 p-0">
-          <li>
-            <a
-              href="#proyectos"
-              class="px-4 py-1.5 rounded-full text-sm font-medium bg-bg text-accent border border-divider shadow-sm transition-colors duration-200"
-            >
-              Proyectos
-            </a>
-          </li>
-          <li>
-            <a
-              href="#sobre-mi"
-              class="px-4 py-1.5 rounded-full text-sm font-medium text-muted hover:text-main transition-colors duration-200 text-nowrap"
-            >
-              Sobre mí
-            </a>
-          </li>
-          <li>
-            <a
-              href="#skills"
-              class="px-4 py-1.5 rounded-full text-sm font-medium text-muted hover:text-main transition-colors duration-200"
-            >
-              Skills
-            </a>
-          </li>
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  /*bg-bg text-accent border border-divider shadow-sm estilos activo*/
+                  class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200"
+                >
+                  {item.content}
+                </a>
+              </li>
+            ))
+          }
+          
           <li>
             <div class="flex items-center">
               <span class="w-px h-5 bg-divider mx-2"></span>
