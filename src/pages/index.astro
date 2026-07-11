@@ -1,5 +1,9 @@
 ---
+import Image from "astro/components/Image.astro";
 import Layout from "../layouts/Layout.astro";
+import imagen_perfil from "@/assets/perfil.jpg";
+import imagen_servicio from "@/assets/servicioSocial.png";
+import imagen_publicaciones from "@/assets/publicacionesIth.png";
 
 const INFO = [
   { label: "Rol", value: "Estudiante Ing. en Sistemas Computacionales" },
@@ -22,46 +26,48 @@ const PROYECTOS = [
     tag: "2026 · v3",
     title: "PublicacionesITH",
     desc: "CMS para el departamento de comunicación de ITH: publicaciones, dashboard de noticias, administración de usuarios y panel de estadísticas, con sistema de diseño propio.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Publicaciones+ITH",
+    image: imagen_publicaciones,
     chips: ["HTML/CSS", "Sistema de diseño", "Equipo"],
-    github: "https://github.com/marcos/pub-ith",
-    preview: "https://pub-ith.example.com",
+    github: null,
+    preview: null,
   },
   {
     id: "v2",
     tag: "2026 · v2",
     title: "Registro de Veranos",
     desc: "Sistema de registro estudiantil con Google Apps Script sobre Google Sheets como base de datos, autenticación con Google OAuth y escritura en cola para respuestas más rápidas.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Registro+Veranos",
+    image: imagen_servicio,
     chips: ["Google Apps Script", "OAuth", "Netlify"],
-    github: null,
-    preview: "https://veranos.example.com",
+    github: "null",
+    preview: "null",
   },
   {
     id: "v1",
     tag: "2025 · v1",
     title: "Pipeline de edición de video",
     desc: "Herramienta en Python que elimina silencios de un video automáticamente, genera subtítulos y sincroniza audio externo por correlación cruzada.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Video+Pipeline",
+    image: imagen_servicio,
     chips: ["Python", "FFmpeg", "Whisper"],
-    github: "https://github.com/marcos/video-pipeline",
+    github: "null",
     preview: null,
   },
 ];
 ---
 
 <Layout title="Marcos Ochoa — Portfolio">
-  <main class="pt-28 md:pt-36">
+  <main class="pt-24 sm:pt-36">
     <!-- ---------- HERO ---------- -->
     <section
       class="pb-24 border-b border-divider transition-colors duration-300"
     >
       <div class="max-w-4xl mx-auto px-8">
         <div class="mb-8">
-          <img
-            src="https://placehold.co/120x120/111827/e5e7eb?text=MO"
+          <Image
+            src={imagen_perfil}
             alt="Marcos Ochoa"
             class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-surface shadow-md object-cover transition-colors duration-300"
+            loading="eager"
+            fetchpriority="high"
           />
         </div>
 
@@ -160,7 +166,7 @@ const PROYECTOS = [
           PROYECTOS.map((proyecto) => (
             <article class="flex flex-col md:flex-row gap-8 lg:gap-12 fade-up-entry">
               <div class="w-full md:w-5/12 lg:w-1/2 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface">
-                <img
+                <Image
                   src={proyecto.image}
                   alt={`Captura del proyecto ${proyecto.title}`}
                   class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
@@ -310,10 +316,7 @@ const PROYECTOS = [
     </section>
 
     <!-- ---------- SKILLS ---------- -->
-    <section
-      id="skills"
-      class="max-w-5xl mx-auto px-8 pt-12 pb-32 scroll-mt-24"
-    >
+    <section id="skills" class="max-w-5xl mx-auto px-8 pt-12 pb-8 scroll-mt-24">
       <div class="flex items-center gap-3 mb-12">
         <svg
           class="text-main"
@@ -359,26 +362,26 @@ const PROYECTOS = [
       </div>
     </section>
   </main>
-</Layout>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const entries = document.querySelectorAll(".fade-up-entry");
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (items) => {
-          items.forEach((item) => {
-            if (item.isIntersecting) {
-              item.target.classList.add("visible");
-              io.unobserve(item.target);
-            }
-          });
-        },
-        { threshold: 0.1 },
-      );
-      entries.forEach((el) => io.observe(el));
-    } else {
-      entries.forEach((el) => el.classList.add("visible"));
-    }
-  });
-</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const entries = document.querySelectorAll(".fade-up-entry");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (items) => {
+            items.forEach((item) => {
+              if (item.isIntersecting) {
+                item.target.classList.add("visible");
+                io.unobserve(item.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+        entries.forEach((el) => io.observe(el));
+      } else {
+        entries.forEach((el) => el.classList.add("visible"));
+      }
+    });
+  </script>
+</Layout>
