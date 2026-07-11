@@ -14,33 +14,63 @@ const INFO = [
 ];
 const AVAILABLE = true;
 const CONTACT = {
-  MAIL: "contacto@marcosochoa.dev",
+  MAIL: "contacto@marcosochoa.dev?subject=Me%20interesa%20saber%20sobre",
   GITHUB: "mark436",
 };
 
 const SKILLS = {
-  Frontend: ["React", "Vite", "Astro", "Tailwind"],
-  Backend: ["Supabase", "NestJS", "Netlify Functions", "Apps Script"],
-  Sistemas: ["C#", "NASM x86-64", "FFmpeg"],
-  Lenguajes: ["Python", "Haskell", "Prolog", "JavaScript"],
+  Frontend: [
+    "React",
+    "Astro",
+    "Vite",
+    "Tailwind CSS",
+    "HTML",
+    "CSS",
+    "JavaScript",
+  ],
+
+  Backend: [
+    "Node.js",
+    "NestJS",
+    "Supabase",
+    "Netlify Functions",
+    "Google Apps Script",
+  ],
+
+  BasesDeDatos: ["PostgreSQL", "MySQL"],
+
+  DevOps: ["Docker", "Git", "GitHub"],
+
+  Sistemas: ["NASM x86-64", "FFmpeg"],
+
+  Lenguajes: [
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "Java",
+    "Rust",
+    "Haskell",
+    "Prolog",
+    "C#",
+  ],
 };
 
 const PROYECTOS = [
   {
     id: "v3",
-    tag: "2026 · v3",
+    tag: "2026 · Sistema web y backend",
     title: "PublicacionesITH",
-    desc: "CMS para el departamento de comunicación de ITH: publicaciones, dashboard de noticias, administración de usuarios y panel de estadísticas, con sistema de diseño propio.",
+    desc: "Sistema para el departamento de comunicación de ITH que se encarga de facilitar el ingreso de la información para hacer publicaciones guardandolas en una base de datos que utiliza el tecnológico para despúes publicarlas, autenticado con supabase.",
     image: imagen_publicaciones,
-    chips: ["HTML/CSS", "Sistema de diseño", "Equipo"],
+    chips: ["Astro", "Sistema de diseño", "Supabase"],
     github: null,
     preview: null,
   },
   {
     id: "v2",
-    tag: "2026 · v2",
+    tag: "2026 · Sistema web y backend",
     title: "Registro de Veranos",
-    desc: "Sistema de registro estudiantil con Google Apps Script sobre Google Sheets como base de datos, autenticación con Google OAuth y escritura en cola para respuestas más rápidas.",
+    desc: "Sistema de registro para campamentos de verano en el ITH con Google Sheets como base de datos, autenticación con Google y una interfaz web para facilitar el registro.",
     image: imagen_servicio,
     chips: ["Google Apps Script", "OAuth", "Netlify"],
     github: null,
@@ -48,9 +78,9 @@ const PROYECTOS = [
   },
   {
     id: "v1",
-    tag: "2025 · v1",
-    title: "Pipeline de edición de video",
-    desc: "Herramienta en Python que elimina silencios de un video automáticamente, genera subtítulos y sincroniza audio externo por correlación cruzada.",
+    tag: "2025 · Automatización",
+    title: "Herramienta de edición de video",
+    desc: "Herramienta de terminal en Python que elimina silencios de un video automáticamente utilizando subtitulos generados automaticamente para detectar los silencios y las partes importantes",
     image: imagen_servicio,
     chips: ["Python", "FFmpeg", "Whisper"],
     github: null,
