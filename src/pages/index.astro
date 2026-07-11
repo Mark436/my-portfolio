@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import imagen_perfil from "@/assets/perfil.jpg";
 
 const INFO = [
   { label: "Rol", value: "Estudiante Ing. en Sistemas Computacionales" },
@@ -58,8 +59,8 @@ const PROYECTOS = [
     >
       <div class="max-w-4xl mx-auto px-8">
         <div class="mb-8">
-          <img
-            src="https://placehold.co/120x120/111827/e5e7eb?text=MO"
+        <Image
+          src={imagen_perfil}
             alt="Marcos Ochoa"
             class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-surface shadow-md object-cover transition-colors duration-300"
           />
