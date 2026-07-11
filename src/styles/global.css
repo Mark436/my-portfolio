@@ -10,6 +10,8 @@
   --color-primary: var(--theme-primary);
   --color-primary-fg: var(--theme-primary-fg);
   --color-accent: var(--theme-accent);
+  --color-active: var(--theme-active);
+  --color-unactive: var(--theme-unactive);
 }
 
 @layer base {
@@ -23,24 +25,28 @@
     --theme-primary: #111827;
     --theme-primary-fg: #f9fafb;
     --theme-accent: #84cc16; /* Verde lima */
+    --theme-active: #84cc16; /* Verde lima */
+    --theme-unactive: #e61414; /* Verde lima */
   }
 
   .dark {
     /* MODO OSCURO */
-    --theme-bg: #09090b; 
+    --theme-bg: #09090b;
     --theme-surface: #18181b;
     --theme-text-main: #f4f4f5;
     --theme-text-muted: #a1a1aa;
     --theme-border: #27272a;
     --theme-primary: #f4f4f5;
     --theme-primary-fg: #09090b;
-    --theme-accent: #eab308; /* Amarillo */
+    --theme-accent: #fffc41; /* Amarillo */
   }
 
   body {
     background-color: var(--theme-bg);
     color: var(--theme-text-main);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 }
 
@@ -48,7 +54,9 @@
 .fade-up-entry {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
 }
 .fade-up-entry.visible {
   opacity: 1;
@@ -56,5 +64,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up-entry { transition: none; opacity: 1; transform: none; }
+  .fade-up-entry {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
