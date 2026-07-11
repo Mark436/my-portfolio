@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 
 const NAV_ITEMS = [
-  { href: "#proyectos", content: "Proyectos muy largo larguisisisisisissiimo" },
+  { href: "#proyectos", content: "Proyectos" },
   { href: "#sobre-mi", content: "Sobre mi" },
   { href: "#skills", content: "Skills" },
 ];
@@ -84,9 +84,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <div
         class="flex items-center p-1.5 bg-surface/80 backdrop-blur-xl border border-divider shadow-lg rounded-full transition-colors duration-300"
       >
-        <ul class="flex items-center gap-1 px-2 list-none m-0 p-0">
+        <ul
+          class="flex items-center gap-1 px-2 list-none m-0 p-0"
+          id="nav-list"
+        >
           <span
-            class="bg-primary/30 text-accent border border-divider shadow-sm"
+            class="bg-bg/30 border border-divider shadow-sm pointer-events-none"
             id="indicator"></span>
           {
             NAV_ITEMS.map((item) => (
@@ -103,7 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
           <li>
             <div class="flex items-center">
-              <span class="w-px h-5 bg-divider mx-2"></span>
+              <span class="w-px h-5 bg-divider mx-2 pointer-events-none"></span>
               <button
                 id="theme-btn"
                 type="button"
@@ -134,45 +137,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </nav>
 
     <slot />
+    <script>
+      const themeBtn = document.getElementById("theme-btn");
+      themeBtn?.addEventListener("click", () => {
+        const el = document.documentElement;
+        const isDark = el.classList.toggle("dark");
+
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+    </script>
   </body>
 </html>
 
-<script>
-  const $ = (selector: string) => document.querySelector(selector);
-
-  document.addEventListener("astro:page-load", () => {
-    const themeBtn = document.getElementById("theme-btn");
-    themeBtn?.addEventListener("click", () => {
-      const el = document.documentElement;
-      const isDark = el.classList.toggle("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-  });
-  const enlaces = document.querySelectorAll("a");
-
-  enlaces.forEach((anchor) => {
-    anchor.addEventListener("mouseover", () => {
-      enlaces.forEach((enlace) => enlace.classList.remove("active-item"));
-      anchor.classList.add("active-item");
-    });
-  });
-  $("ul")?.addEventListener("mouseover", () => {
-    $("ul")?.classList.remove("active-item");
-  });
-  $("ul")?.addEventListener("mouseleave", () => {
-    enlaces.forEach((enlace) => enlace.classList.remove("active-item"));
-    $("ul")?.classList.add("active-item");
-  });
-</script>
-
 <style>
-  .active-item {
+  #nav-list {
     anchor-name: --active;
-    transition: all 500ms ease;
-  }
-  ul,
-  a {
-    transition: all 500ms ease;
+
+    & a:hover {
+      anchor-name: --active;
+      transition: all 300ms ease;
+      color: var(--color-accent);
+    }
   }
   #indicator {
     transition: all 500ms ease;
