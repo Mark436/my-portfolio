@@ -300,8 +300,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     height: calc(anchor-size(height) + 8px);
 
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.229);
-    border: 1px solid rgba(255, 255, 255, 0.195);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.05)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.048);
     opacity: 0;
   }
 
