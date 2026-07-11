@@ -179,7 +179,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             if (entry.isIntersecting) setActive(entry.target.id);
           });
         },
-        { rootMargin: "-15% 0px -70% 0px", threshold: 0 },
+        { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
       );
       sections.forEach((section) => observer.observe(section));
 
