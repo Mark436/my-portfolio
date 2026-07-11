@@ -13,6 +13,11 @@ const INFO = [
   { label: "Ubicación", value: "Hermosillo, MX" },
 ];
 
+const CONTACT = {
+  MAIL: "contacto@marcosochoa.dev",
+  GITHUB: "mark436",
+};
+
 const SKILLS = {
   Frontend: ["React", "Vite", "Astro", "Tailwind"],
   Backend: ["Supabase", "NestJS", "Netlify Functions", "Apps Script"],
@@ -38,8 +43,8 @@ const PROYECTOS = [
     desc: "Sistema de registro estudiantil con Google Apps Script sobre Google Sheets como base de datos, autenticación con Google OAuth y escritura en cola para respuestas más rápidas.",
     image: imagen_servicio,
     chips: ["Google Apps Script", "OAuth", "Netlify"],
-    github: "null",
-    preview: "null",
+    github: null,
+    preview: null,
   },
   {
     id: "v1",
@@ -48,7 +53,7 @@ const PROYECTOS = [
     desc: "Herramienta en Python que elimina silencios de un video automáticamente, genera subtítulos y sincroniza audio externo por correlación cruzada.",
     image: imagen_servicio,
     chips: ["Python", "FFmpeg", "Whisper"],
-    github: "null",
+    github: null,
     preview: null,
   },
 ];
@@ -97,23 +102,23 @@ const PROYECTOS = [
 
         <div class="flex flex-wrap items-center gap-4">
           <a
-            href="#proyectos"
             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-primary text-primary-fg border-primary hover:opacity-90"
+            href={`mailto:${CONTACT.MAIL}`}
           >
-            Ver proyectos
+            Contactar
           </a>
           <a
-            href="mailto:marcos@example.com"
+            href="#proyectos"
             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
           >
-            Contactar por correo
+            Ver proyectos
           </a>
 
           <span class="hidden sm:inline w-px h-8 bg-divider mx-2"></span>
 
           <div class="flex gap-3">
             <a
-              href="https://github.com/mark436"
+              href={`https://github.com/${CONTACT.GITHUB}`}
               target="_blank"
               aria-label="GitHub"
               class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-divider text-muted transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-main active:translate-y-0 active:shadow-sm"
@@ -139,7 +144,7 @@ const PROYECTOS = [
     <!-- ---------- PROYECTOS ---------- -->
     <section
       id="proyectos"
-      class="max-w-5xl mx-auto px-8 pt-24 pb-12 scroll-mt-24"
+      class="max-w-4xl mx-auto px-8 pt-24 pb-12 scroll-mt-24"
     >
       <div class="flex items-center gap-3 mb-16">
         <svg
@@ -249,7 +254,7 @@ const PROYECTOS = [
     <!-- ---------- SOBRE MÍ ---------- -->
     <section
       id="sobre-mi"
-      class="max-w-5xl mx-auto px-8 pt-12 pb-12 scroll-mt-24"
+      class="max-w-4xl mx-auto px-8 pt-12 pb-12 scroll-mt-24"
     >
       <div class="flex items-center gap-3 mb-12">
         <svg
@@ -316,7 +321,7 @@ const PROYECTOS = [
     </section>
 
     <!-- ---------- SKILLS ---------- -->
-    <section id="skills" class="max-w-5xl mx-auto px-8 pt-12 pb-8 scroll-mt-24">
+    <section id="skills" class="max-w-4xl mx-auto px-8 pt-12 pb-8 scroll-mt-24">
       <div class="flex items-center gap-3 mb-12">
         <svg
           class="text-main"
