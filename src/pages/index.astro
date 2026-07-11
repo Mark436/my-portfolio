@@ -1,6 +1,8 @@
 ---
+import Image from "astro/components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 import imagen_perfil from "@/assets/perfil.jpg";
+import imagen_servicio from "@/assets/servicioSocial.png";
 
 const INFO = [
   { label: "Rol", value: "Estudiante Ing. en Sistemas Computacionales" },
@@ -23,344 +25,337 @@ const PROYECTOS = [
     tag: "2026 · v3",
     title: "PublicacionesITH",
     desc: "CMS para el departamento de comunicación de ITH: publicaciones, dashboard de noticias, administración de usuarios y panel de estadísticas, con sistema de diseño propio.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Publicaciones+ITH",
+    image: imagen_servicio,
     chips: ["HTML/CSS", "Sistema de diseño", "Equipo"],
-    github: "https://github.com/marcos/pub-ith",
-    preview: "https://pub-ith.example.com",
+    github: null,
+    preview: null,
   },
   {
     id: "v2",
     tag: "2026 · v2",
     title: "Registro de Veranos",
     desc: "Sistema de registro estudiantil con Google Apps Script sobre Google Sheets como base de datos, autenticación con Google OAuth y escritura en cola para respuestas más rápidas.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Registro+Veranos",
+    image: imagen_servicio,
     chips: ["Google Apps Script", "OAuth", "Netlify"],
-    github: null,
-    preview: "https://veranos.example.com",
+    github: "null",
+    preview: "null",
   },
   {
     id: "v1",
     tag: "2025 · v1",
     title: "Pipeline de edición de video",
     desc: "Herramienta en Python que elimina silencios de un video automáticamente, genera subtítulos y sincroniza audio externo por correlación cruzada.",
-    image: "https://placehold.co/600x340/111827/e5e7eb?text=Video+Pipeline",
+    image: imagen_servicio,
     chips: ["Python", "FFmpeg", "Whisper"],
-    github: "https://github.com/marcos/video-pipeline",
+    github: "null",
     preview: null,
   },
 ];
 ---
 
-<Layout title="Marcos Ochoa — Portfolio">
-  <main class="pt-28 md:pt-36">
-    <!-- ---------- HERO ---------- -->
-    <section
-      class="pb-24 border-b border-divider transition-colors duration-300"
-    >
-      <div class="max-w-4xl mx-auto px-8">
-        <div class="mb-8">
+<Layout title="Marcos Ochoa — Portfolio" />
+<main class="pt-24 sm:pt-36">
+  <!-- ---------- HERO ---------- -->
+  <section class="pb-24 border-b border-divider transition-colors duration-300">
+    <div class="max-w-4xl mx-auto px-8">
+      <div class="mb-8">
         <Image
           src={imagen_perfil}
-            alt="Marcos Ochoa"
-            class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-surface shadow-md object-cover transition-colors duration-300"
-          />
-        </div>
-
-        <div
-          class="flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-widest mb-6"
-        >
-          <span class="w-2 h-2 rounded-full bg-accent ring-4 ring-accent/20"
-          ></span>
-          Disponible para proyectos
-        </div>
-
-        <h1
-          class="font-mono font-bold text-5xl md:text-7xl leading-none tracking-tight m-0 mb-6 text-main"
-        >
-          Marcos Ochoa
-        </h1>
-
-        <p
-          class="text-lg md:text-xl text-muted max-w-2xl m-0 mb-10 leading-relaxed font-sans"
-        >
-          Desarrollador <strong class="text-main font-semibold"
-            >full-stack</strong
-          > enfocado en sistemas web y automatización. Construyo desde interfaces
-          en React hasta pipelines de backend y scripts que le quitan trabajo repetitivo
-          a la gente.
-        </p>
-
-        <div class="flex flex-wrap items-center gap-4">
-          <a
-            href="#proyectos"
-            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-primary text-primary-fg border-primary hover:opacity-90"
-          >
-            Ver proyectos
-          </a>
-          <a
-            href="mailto:marcos@example.com"
-            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
-          >
-            Contactar por correo
-          </a>
-
-          <span class="hidden sm:inline w-px h-8 bg-divider mx-2"></span>
-
-          <div class="flex gap-3">
-            <a
-              href="https://github.com/mark436"
-              target="_blank"
-              aria-label="GitHub"
-              class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-divider text-muted transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-main active:translate-y-0 active:shadow-sm"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                ><path
-                  d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"
-                ></path></svg
-              >
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- PROYECTOS ---------- -->
-    <section
-      id="proyectos"
-      class="max-w-5xl mx-auto px-8 pt-24 pb-12 scroll-mt-24"
-    >
-      <div class="flex items-center gap-3 mb-16">
-        <svg
-          class="text-main"
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><polyline points="16 18 22 12 16 6"></polyline><polyline
-            points="8 6 2 12 8 18"></polyline></svg
-        >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Proyectos
-        </h2>
-      </div>
-
-      <div class="flex flex-col gap-16 md:gap-24 border-b border-divider pb-24">
-        {
-          PROYECTOS.map((proyecto) => (
-            <article class="flex flex-col md:flex-row gap-8 lg:gap-12 fade-up-entry">
-              <div class="w-full md:w-5/12 lg:w-1/2 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface">
-                <img
-                  src={proyecto.image}
-                  alt={`Captura del proyecto ${proyecto.title}`}
-                  class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-
-              <div class="w-full md:w-7/12 lg:w-1/2 flex flex-col justify-center">
-                <span class="font-mono text-sm text-muted mb-2 inline-block">
-                  {proyecto.tag}
-                </span>
-
-                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-main tracking-tight">
-                  {proyecto.title}
-                </h3>
-
-                <div class="flex flex-wrap gap-2 mb-6">
-                  {proyecto.chips.map((chip) => (
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-divider bg-surface text-main shadow-sm">
-                      {chip}
-                    </span>
-                  ))}
-                </div>
-
-                <p class="text-muted text-base md:text-lg mb-8 leading-relaxed">
-                  {proyecto.desc}
-                </p>
-
-                <div class="flex flex-wrap gap-3 mt-auto">
-                  {proyecto.github && (
-                    <a
-                      href={proyecto.github}
-                      target="_blank"
-                      class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4" />
-                      </svg>
-                      Code
-                    </a>
-                  )}
-                  {proyecto.preview && (
-                    <a
-                      href={proyecto.preview}
-                      target="_blank"
-                      class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                      Preview
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- ---------- SOBRE MÍ ---------- -->
-    <section
-      id="sobre-mi"
-      class="max-w-5xl mx-auto px-8 pt-12 pb-12 scroll-mt-24"
-    >
-      <div class="flex items-center gap-3 mb-12">
-        <svg
-          class="text-main"
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle
-            cx="12"
-            cy="7"
-            r="4"></circle></svg
-        >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Sobre mí
-        </h2>
-      </div>
-
-      <div class="flex flex-col md:flex-row gap-12 lg:gap-16 fade-up-entry">
-        <!-- Texto Descriptivo -->
-        <div
-          class="w-full md:w-1/2 text-lg text-muted leading-relaxed flex flex-col gap-5"
-        >
-          <p>
-            Me apasiona la intersección entre el desarrollo web y la
-            automatización de procesos. Disfruto construyendo herramientas que
-            resuelven problemas reales y optimizan el flujo de trabajo de las
-            personas.
-          </p>
-          <p>
-            Actualmente me encuentro ampliando mis conocimientos en arquitectura
-            de software y explorando nuevas tecnologías para crear interfaces
-            más rápidas y accesibles.
-          </p>
-        </div>
-
-        <!-- Tabla de Información -->
-        <div class="w-full md:w-1/2">
-          <div
-            class="bg-surface border border-divider rounded-2xl p-6 md:p-8 shadow-sm"
-          >
-            <ul class="flex flex-col gap-4 m-0 p-0 list-none">
-              {
-                INFO.map((item) => (
-                  <li class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-divider last:border-0 last:pb-0 first:pt-0">
-                    <span class="font-mono text-sm text-muted mb-1 sm:mb-0">
-                      {item.label}
-                    </span>
-                    <span class="font-medium text-main text-base">
-                      {item.value}
-                    </span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- SKILLS ---------- -->
-    <section
-      id="skills"
-      class="max-w-5xl mx-auto px-8 pt-12 pb-32 scroll-mt-24"
-    >
-      <div class="flex items-center gap-3 mb-12">
-        <svg
-          class="text-main"
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><polyline points="4 17 10 11 4 5"></polyline><line
-            x1="12"
-            y1="19"
-            x2="20"
-            y2="19"></line></svg
-        >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Skills & Herramientas
-        </h2>
+          alt="Marcos Ochoa"
+          class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-surface shadow-md object-cover transition-colors duration-300"
+        />
       </div>
 
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-up-entry"
+        class="flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-widest mb-6"
       >
-        {
-          Object.entries(SKILLS).map(([category, skillsList]) => (
-            <div class="bg-surface border border-divider rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <h3 class="font-mono text-lg font-bold mb-4 text-main">
-                {category}
-              </h3>
-              <ul class="flex flex-wrap gap-2 m-0 p-0 list-none">
-                {skillsList.map((skill) => (
-                  <li class="px-3 py-1.5 bg-bg border border-divider rounded-lg text-sm font-medium text-muted">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
+        <span class="w-2 h-2 rounded-full bg-accent ring-4 ring-accent/20"
+        ></span>
+        Disponible para proyectos
       </div>
-    </section>
-  </main>
-</Layout>
+
+      <h1
+        class="font-mono font-bold text-5xl md:text-7xl leading-none tracking-tight m-0 mb-6 text-main"
+      >
+        Marcos Ochoa
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-muted max-w-2xl m-0 mb-10 leading-relaxed font-sans"
+      >
+        Desarrollador <strong class="text-main font-semibold">full-stack</strong
+        > enfocado en sistemas web y automatización. Construyo desde interfaces en
+        React hasta pipelines de backend y scripts que le quitan trabajo repetitivo
+        a la gente.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <a
+          href="#proyectos"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-primary text-primary-fg border-primary hover:opacity-90"
+        >
+          Ver proyectos
+        </a>
+        <a
+          href="mailto:marcos@example.com"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
+        >
+          Contactar por correo
+        </a>
+
+        <span class="hidden sm:inline w-px h-8 bg-divider mx-2"></span>
+
+        <div class="flex gap-3">
+          <a
+            href="https://github.com/mark436"
+            target="_blank"
+            aria-label="GitHub"
+            class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-divider text-muted transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-main active:translate-y-0 active:shadow-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              ><path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"
+              ></path></svg
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- PROYECTOS ---------- -->
+  <section
+    id="proyectos"
+    class="max-w-5xl mx-auto px-8 pt-24 pb-12 scroll-mt-24"
+  >
+    <div class="flex items-center gap-3 mb-16">
+      <svg
+        class="text-main"
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="16 18 22 12 16 6"></polyline><polyline
+          points="8 6 2 12 8 18"></polyline></svg
+      >
+      <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
+        Proyectos
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-16 md:gap-24 border-b border-divider pb-24">
+      {
+        PROYECTOS.map((proyecto) => (
+          <article class="flex flex-col md:flex-row gap-8 lg:gap-12 fade-up-entry">
+            <div class="w-full md:w-5/12 lg:w-1/2 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface">
+              <Image
+                src={proyecto.image}
+                alt={`Captura del proyecto ${proyecto.title}`}
+                class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="w-full md:w-7/12 lg:w-1/2 flex flex-col justify-center">
+              <span class="font-mono text-sm text-muted mb-2 inline-block">
+                {proyecto.tag}
+              </span>
+
+              <h3 class="text-2xl md:text-3xl font-bold mb-4 text-main tracking-tight">
+                {proyecto.title}
+              </h3>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                {proyecto.chips.map((chip) => (
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-divider bg-surface text-main shadow-sm">
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
+              <p class="text-muted text-base md:text-lg mb-8 leading-relaxed">
+                {proyecto.desc}
+              </p>
+
+              <div class="flex flex-wrap gap-3 mt-auto">
+                {proyecto.github && (
+                  <a
+                    href={proyecto.github}
+                    target="_blank"
+                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4" />
+                    </svg>
+                    Code
+                  </a>
+                )}
+                {proyecto.preview && (
+                  <a
+                    href={proyecto.preview}
+                    target="_blank"
+                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                    Preview
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ---------- SOBRE MÍ ---------- -->
+  <section
+    id="sobre-mi"
+    class="max-w-5xl mx-auto px-8 pt-12 pb-12 scroll-mt-24"
+  >
+    <div class="flex items-center gap-3 mb-12">
+      <svg
+        class="text-main"
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle
+          cx="12"
+          cy="7"
+          r="4"></circle></svg
+      >
+      <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
+        Sobre mí
+      </h2>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-12 lg:gap-16 fade-up-entry">
+      <!-- Texto Descriptivo -->
+      <div
+        class="w-full md:w-1/2 text-lg text-muted leading-relaxed flex flex-col gap-5"
+      >
+        <p>
+          Me apasiona la intersección entre el desarrollo web y la
+          automatización de procesos. Disfruto construyendo herramientas que
+          resuelven problemas reales y optimizan el flujo de trabajo de las
+          personas.
+        </p>
+        <p>
+          Actualmente me encuentro ampliando mis conocimientos en arquitectura
+          de software y explorando nuevas tecnologías para crear interfaces más
+          rápidas y accesibles.
+        </p>
+      </div>
+
+      <!-- Tabla de Información -->
+      <div class="w-full md:w-1/2">
+        <div
+          class="bg-surface border border-divider rounded-2xl p-6 md:p-8 shadow-sm"
+        >
+          <ul class="flex flex-col gap-4 m-0 p-0 list-none">
+            {
+              INFO.map((item) => (
+                <li class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-divider last:border-0 last:pb-0 first:pt-0">
+                  <span class="font-mono text-sm text-muted mb-1 sm:mb-0">
+                    {item.label}
+                  </span>
+                  <span class="font-medium text-main text-base">
+                    {item.value}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- SKILLS ---------- -->
+  <section id="skills" class="max-w-5xl mx-auto px-8 pt-12 pb-8 scroll-mt-24">
+    <div class="flex items-center gap-3 mb-12">
+      <svg
+        class="text-main"
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="4 17 10 11 4 5"></polyline><line
+          x1="12"
+          y1="19"
+          x2="20"
+          y2="19"></line></svg
+      >
+      <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
+        Skills & Herramientas
+      </h2>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-up-entry"
+    >
+      {
+        Object.entries(SKILLS).map(([category, skillsList]) => (
+          <div class="bg-surface border border-divider rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <h3 class="font-mono text-lg font-bold mb-4 text-main">
+              {category}
+            </h3>
+            <ul class="flex flex-wrap gap-2 m-0 p-0 list-none">
+              {skillsList.map((skill) => (
+                <li class="px-3 py-1.5 bg-bg border border-divider rounded-lg text-sm font-medium text-muted">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</main>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
