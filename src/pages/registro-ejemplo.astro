@@ -1,0 +1,513 @@
+<meta charset="UTF-8" />
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  body {
+    background: #f4f5fb;
+    padding: 16px 20px;
+    color: #2b2b45;
+  }
+
+  .wrapper {
+    max-width: 1000px;
+    margin: auto;
+    background: #fff;
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ececf5;
+
+    position: relative;
+  }
+  .settings-btn {
+    content: "";
+    position: absolute;
+    top: 1em;
+    right: 1em;
+
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    opacity: 0.5;
+
+    background-color: #4b4b63;
+    border-radius: 0.4em;
+  }
+
+  .header {
+    margin-bottom: 35px;
+  }
+
+  .accent-bar {
+    width: 70px;
+    height: 6px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #6c63ff, #8f88ff);
+    margin-bottom: 18px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    color: #2f2a55;
+    font-weight: 700;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .section-label {
+    grid-column: 1/-1;
+    font-size: 18px;
+    font-weight: 700;
+    color: #5b54a4;
+    margin-top: 10px;
+  }
+
+  .divider {
+    grid-column: 1/-1;
+    height: 1px;
+    background: #ececf5;
+    margin: 5px 0;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field.full {
+    grid-column: 1/-1;
+  }
+
+  label,
+  span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b4b63;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    border: 1px solid #d9dbe8;
+    background: #fafafe;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 15px;
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+    outline: none;
+    color: #2d2d44;
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #6c63ff;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.12);
+  }
+
+  ::placeholder {
+    color: #a2a4b8;
+  }
+
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .color-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    flex-shrink: 0;
+  }
+
+  .actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease transform.25s ease;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 14px 24px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(90deg, #6c63ff, #7f77ff);
+    color: white;
+    box-shadow: 0 8px 18px rgba(108, 99, 255, 0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(108, 99, 255, 0.32);
+  }
+
+  .btn-secondary {
+    background: #eef0f7;
+    color: #555a78;
+  }
+
+  .btn-secondary:hover {
+    background: #e2e6f2;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #2f2a55;
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .login-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+  .login-card {
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 1em;
+
+    padding: 2em 2em;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  #googleBtn {
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(66, 133, 244, 0.25);
+    transition:
+      box-shadow 0.3s ease,
+      scale 0.3s ease;
+  }
+
+  #googleBtn:hover {
+    box-shadow: 0 12px 22px rgba(66, 133, 244, 0.32);
+    scale: 1.02;
+    transition:
+      box-shadow 0.3s ease,
+      scale 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 0;
+    }
+    .wrapper {
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+      font-size: 26px;
+    }
+
+    .actions {
+      flex-direction: column;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+</style>
+<body data-astro-cid-usu734bm="">
+  <div
+    id="loginOverlay"
+    class="login-overlay"
+    style="display: none;"
+    data-astro-cid-usu734bm=""
+  >
+    <div class="login-card" data-astro-cid-usu734bm="">
+      <h2 data-astro-cid-usu734bm="">Inicia sesión para continuar</h2>
+      <div id="googleBtn" data-astro-cid-usu734bm=""></div>
+    </div>
+  </div>
+
+  <div class="wrapper" data-astro-cid-usu734bm="">
+    <div class="header" data-astro-cid-usu734bm="">
+      <div class="accent-bar" data-astro-cid-usu734bm=""></div>
+      <h1 data-astro-cid-usu734bm="">
+        Campamentos de Verano
+        <current-year data-astro-cid-usu734bm="true">2026</current-year>
+      </h1>
+    </div>
+
+    <div class="grid" data-astro-cid-usu734bm="">
+      <div class="section-label" data-astro-cid-usu734bm="">
+        Datos del alumno
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="nombres" data-astro-cid-usu734bm="">Nombre(s)</label>
+        <input
+          type="text"
+          id="nombres"
+          placeholder="Ej. Ana Sofía"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="apellidos" data-astro-cid-usu734bm="">Apellidos</label>
+        <input
+          type="text"
+          id="apellidos"
+          placeholder="Ej. García López"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="edad" data-astro-cid-usu734bm="">Edad</label>
+        <input
+          type="number"
+          id="edad"
+          min="1"
+          max="18"
+          placeholder="Ej. 10"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; margin-right:5%;"
+          data-astro-cid-usu734bm=""
+        >
+          <label for="color" data-astro-cid-usu734bm="">Color / Grupo</label>
+          <span data-astro-cid-usu734bm="">
+            Alumnos:
+            <span id="contadorGrupos" data-astro-cid-usu734bm="">0</span>
+          </span>
+        </div>
+
+        <div class="color-row" data-astro-cid-usu734bm="">
+          <div
+            class="color-dot"
+            id="colorDot"
+            style="background:#ccc;"
+            data-astro-cid-usu734bm=""
+          >
+          </div>
+
+          <select id="color" style="flex:1;" data-astro-cid-usu734bm="">
+            <option value="" data-astro-cid-usu734bm="">— Seleccionar —</option>
+            <option value="Rojo" data-hex="#E24B4A" data-astro-cid-usu734bm=""
+              >Rojo</option
+            >
+            <option value="Verde" data-hex="#639922" data-astro-cid-usu734bm=""
+              >Verde</option
+            >
+            <option value="Café" data-hex="#854F0B" data-astro-cid-usu734bm=""
+              >Café</option
+            >
+            <option
+              value="Azul Cielo"
+              data-hex="#85B7EB"
+              data-astro-cid-usu734bm="">Azul Cielo</option
+            >
+            <option
+              value="Azul Marino"
+              data-hex="#0C447C"
+              data-astro-cid-usu734bm="">Azul Marino</option
+            >
+            <option value="Gris" data-hex="#888780" data-astro-cid-usu734bm=""
+              >Gris</option
+            >
+            <option
+              value="Verde Lima"
+              data-hex="#97C459"
+              data-astro-cid-usu734bm="">Verde Lima</option
+            >
+            <option value="Negro" data-hex="#2C2C2A" data-astro-cid-usu734bm=""
+              >Negro</option
+            >
+            <option value="Rosa" data-hex="#ED93B1" data-astro-cid-usu734bm=""
+              >Rosa</option
+            >
+            <option
+              value="Naranja"
+              data-hex="#EF9F27"
+              data-astro-cid-usu734bm="">Naranja</option
+            >
+            <option
+              value="Amarillo"
+              data-hex="#fdff21"
+              data-astro-cid-usu734bm="">Amarillo</option
+            >
+            <option value="Oro" data-hex="#ffd700" data-astro-cid-usu734bm=""
+              >Oro</option
+            >
+            <option value="Morado" data-hex="#7F77DD" data-astro-cid-usu734bm=""
+              >Morado</option
+            >
+          </select>
+        </div>
+      </div>
+
+      <div class="divider" data-astro-cid-usu734bm=""></div>
+
+      <div class="section-label" data-astro-cid-usu734bm="">Contacto</div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="padre" data-astro-cid-usu734bm="">Nombre padre/madre</label>
+        <input
+          type="text"
+          id="padre"
+          placeholder="Ej. Carlos García"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="responsable" data-astro-cid-usu734bm=""
+          >Responsable de recoger</label
+        >
+        <input
+          type="text"
+          id="responsable"
+          placeholder="Ej. María López"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="telAlumno" data-astro-cid-usu734bm=""
+          >Teléfono del alumno</label
+        >
+        <input
+          type="tel"
+          id="telAlumno"
+          placeholder="Ej. 662 123 4567"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="field" data-astro-cid-usu734bm="">
+        <label for="telEmergencia" data-astro-cid-usu734bm=""
+          >Teléfono de emergencia</label
+        >
+        <input
+          type="tel"
+          id="telEmergencia"
+          placeholder="Ej. 662 987 6543"
+          data-astro-cid-usu734bm=""
+        />
+      </div>
+
+      <div class="divider" data-astro-cid-usu734bm=""></div>
+
+      <div class="section-label" data-astro-cid-usu734bm="">
+        Información médica
+      </div>
+
+      <div class="field full" data-astro-cid-usu734bm="">
+        <label for="discapacidad" data-astro-cid-usu734bm="">
+          Discapacidad / Alergia / Padecimiento
+        </label>
+        <textarea
+          id="discapacidad"
+          placeholder="Describe cualquier condición relevante o escribe 'Ninguna'"
+          data-astro-cid-usu734bm=""></textarea>
+      </div>
+    </div>
+
+    <div class="actions" data-astro-cid-usu734bm="">
+      <button id="registrarBtn" class="btn-primary" data-astro-cid-usu734bm="">
+        <i
+          class="ti ti-user-plus"
+          aria-hidden="true"
+          style="font-size:15px; vertical-align:-2px; margin-right:6px;"
+          data-astro-cid-usu734bm=""></i>
+        Registrar
+      </button>
+
+      <button id="limpiarBtn" class="btn-secondary" data-astro-cid-usu734bm="">
+        Limpiar
+      </button>
+    </div>
+
+    <div class="toast" id="toast" data-astro-cid-usu734bm="">
+      <i
+        class="ti ti-circle-check"
+        aria-hidden="true"
+        style="font-size:16px;"
+        data-astro-cid-usu734bm=""></i>
+      Alumno registrado correctamente
+    </div>
+  </div>
+
+  <script>
+    /* Tu JavaScript permanece exactamente igual */
+  </script>
+</body>

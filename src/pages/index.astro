@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import imagen_perfil from "@/assets/perfil.jpg";
 import imagen_servicio from "@/assets/servicioSocial.png";
 import imagen_publicaciones from "@/assets/publicacionesIth.png";
+import imagen_edicion from "@/assets/edicionPython.png";
 import { cn } from "@/lib/utils.ts";
 
 const INFO = [
@@ -64,7 +65,7 @@ const PROYECTOS = [
     desc: "Sistema para el departamento de comunicación de ITH que se encarga de facilitar el ingreso de la información para hacer publicaciones guardandolas en una base de datos que utiliza el tecnológico para despúes publicarlas, autenticado con supabase.",
     image: imagen_publicaciones,
     chips: ["Astro", "Sistema de diseño", "Supabase"],
-    github: null,
+    github: "https://github.com/Mark436/publicaciones-ith",
     preview: null,
   },
   {
@@ -75,16 +76,16 @@ const PROYECTOS = [
     image: imagen_servicio,
     chips: ["Google Apps Script", "OAuth", "Netlify"],
     github: null,
-    preview: null,
+    preview: "/registro-ejemplo",
   },
   {
     id: "v1",
     tag: "2025 · Automatización",
     title: "Herramienta de edición de video",
     desc: "Herramienta de terminal en Python que elimina silencios de un video automáticamente utilizando subtitulos generados automaticamente para detectar los silencios y las partes importantes",
-    image: imagen_servicio,
+    image: imagen_edicion,
     chips: ["Python", "FFmpeg", "Whisper"],
-    github: null,
+    github: "https://github.com/Mark436/autoEdit",
     preview: null,
   },
 ];
