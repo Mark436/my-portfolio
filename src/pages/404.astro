@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 — Página no encontrada" no_nav="true">
+  <main class="min-h-[80vh] flex items-center justify-center px-8">
+    <section class="max-w-3xl w-full text-center">
+      <div
+        class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted mb-6"
+      >
+        <span
+          class="w-2.5 h-2.5 rounded-full bg-blue-400 ring-4 ring-blue-400/20"
+        ></span>
+        Error 404
+      </div>
+
+      <h1
+        class="font-mono text-7xl md:text-9xl font-bold tracking-tight text-main leading-none"
+      >
+        404
+      </h1>
+
+      <h2
+        class="mt-6 font-mono text-3xl md:text-4xl font-bold text-main tracking-tight"
+      >
+        Ruta no encontrada
+      </h2>
+
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-xl mx-auto">
+        Parece que esta página no existe o fue movida. Puedes volver al inicio
+        para explorar mis proyectos, experiencia y tecnologías.
+      </p>
+
+      <div
+        class="mt-12 bg-surface border border-divider rounded-2xl p-6 text-left max-w-lg mx-auto shadow-sm"
+      >
+        <p class="font-mono text-sm text-muted mb-4">GET /pagina</p>
+
+        <div
+          class="border-l-2 border-blue-400 pl-4 text-main font-mono text-sm space-y-2"
+        >
+          <p>Status: <span class="text-red-400">404 Not Found</span></p>
+          <p>Message: No se encontró el recurso solicitado.</p>
+          <p>Hint: Regresa al inicio.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 bg-primary text-primary-fg border-primary hover:opacity-90"
+        >
+          Volver al inicio
+        </a>
+
+        <a
+          href="/#proyectos"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 bg-surface text-main border-divider hover:bg-bg"
+        >
+          Ver proyectos
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
