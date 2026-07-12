@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import StatusPage from "@/components/statusPage.astro";
+---
+
+<Layout title="En construcción" no_nav="true">
+  <StatusPage
+    badge="Work in Progress"
+    title="Página en construcción"
+    description="Esta sección aún está en desarrollo. Estoy trabajando en ella y estará disponible pronto."
+    endpoint="GET /blog"
+    status="102 Processing"
+    message="El recurso solicitado todavía se encuentra en desarrollo."
+    hint="Puedes regresar al inicio o explorar otras secciones."
+    secondaryHref="/#proyectos"
+    secondaryText="Ver proyectos"
+  />
+</Layout>
