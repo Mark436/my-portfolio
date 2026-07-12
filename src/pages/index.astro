@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import imagen_perfil from "@/assets/perfil.jpg";
 import imagen_servicio from "@/assets/servicioSocial.png";
 import imagen_publicaciones from "@/assets/publicacionesIth.png";
+import { cn } from "@/lib/utils.ts";
 
 const INFO = [
   { label: "Rol", value: "Sistemas Computacionales" },
@@ -110,7 +111,12 @@ const PROYECTOS = [
           class="flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-widest mb-3"
         >
           <span
-            class={`w-4 h-4 rounded-full bg-${AVAILABLE ? "active" : "unactive"} ring-4 ring-${AVAILABLE ? "active" : "unactive"}/20`}
+            class={cn(
+              "w-3 h-3 rounded-full ring-4",
+              AVAILABLE
+                ? "bg-active ring-active/20"
+                : "bg-unactive ring-unactive/20",
+            )}
           >
           </span>
           Disponible para proyectos
