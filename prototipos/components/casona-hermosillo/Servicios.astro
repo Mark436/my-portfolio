@@ -1,0 +1,55 @@
+---
+const servicios = [
+  {
+    nombre: "Banquete y barra",
+    detalle: "Cocina propia con menú regional sonorense o de autor.",
+  },
+  {
+    nombre: "Coordinación del día",
+    detalle: "Un coordinador de La Casona desde el montaje hasta el cierre.",
+  },
+  {
+    nombre: "Mobiliario y mantelería",
+    detalle: "Piezas de madera y hierro forjado a juego con la casona.",
+  },
+  {
+    nombre: "Estacionamiento y valet",
+    detalle: "Para hasta 90 vehículos, con servicio de valet parking.",
+  },
+];
+---
+
+<section
+  id="servicios"
+  class="bg-hierro px-5 py-20 text-cantera sm:px-8 sm:py-28"
+>
+  <div class="mx-auto max-w-6xl">
+    <p
+      class="mb-3 font-body text-xs font-semibold uppercase tracking-[0.3em] text-buganvilia"
+    >
+      Qué incluye
+    </p>
+    <h2
+      class="font-display text-balance text-3xl leading-tight sm:text-4xl md:text-5xl"
+    >
+      Todo lo que la fecha necesita
+    </h2>
+
+    <ul
+      class="mt-10 grid gap-px overflow-hidden rounded-2xl bg-cantera/10 sm:grid-cols-2"
+    >
+      {
+        servicios.map((servicio) => (
+          <li class="bg-hierro p-6 sm:p-8">
+            <h3 class="font-display text-lg text-cantera sm:text-xl">
+              {servicio.nombre}
+            </h3>
+            <p class="mt-2 font-body text-sm text-cantera/70">
+              {servicio.detalle}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

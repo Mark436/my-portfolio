@@ -1,0 +1,98 @@
+---
+const links = [
+  { href: "#historia", label: "Nuestra historia" },
+  { href: "#espacios", label: "Espacios" },
+  { href: "#servicios", label: "Servicios" },
+  { href: "#ubicacion", label: "Ubicación" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<header class="absolute inset-x-0 top-0 z-50">
+  <div
+    class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-8"
+  >
+    <a
+      href="#"
+      class="font-display text-xl tracking-wide text-cantera sm:text-2xl"
+    >
+      La Casona
+    </a>
+
+    <!-- Botón hamburguesa (solo móvil) -->
+    <button
+      id="nav-toggle"
+      class="flex flex-col gap-1.5 p-2 md:hidden"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Abrir menú"
+    >
+      <span class="h-0.5 w-6 bg-cantera transition-transform"></span>
+      <span class="h-0.5 w-6 bg-cantera transition-opacity"></span>
+      <span class="h-0.5 w-6 bg-cantera transition-transform"></span>
+    </button>
+
+    <!-- Nav desktop -->
+    <nav class="hidden items-center gap-8 md:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="font-body text-sm font-medium uppercase tracking-wider text-cantera/90 transition-colors hover:text-buganvilia"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="#contacto"
+        class="rounded-xl bg-buganvilia px-5 py-2 text-sm font-semibold uppercase tracking-wider text-cantera transition-colors hover:bg-buganvilia-dark"
+      >
+        Reservar fecha
+      </a>
+    </nav>
+  </div>
+
+  <!-- Nav móvil desplegable -->
+  <nav
+    id="nav-menu"
+    class="mx-5 hidden flex-col gap-1 rounded-2xl bg-hierro/95 p-4 backdrop-blur-sm md:hidden"
+  >
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class="rounded-lg px-3 py-3 font-body text-base font-medium text-cantera transition-colors hover:bg-white/5"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <a
+      href="#contacto"
+      class="mt-2 rounded-xl bg-buganvilia px-3 py-3 text-center text-base font-semibold uppercase tracking-wider text-cantera"
+    >
+      Reservar fecha
+    </a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("nav-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("flex");
+    menu?.classList.toggle("hidden");
+    toggle.setAttribute("aria-expanded", String(!!isOpen));
+  });
+
+  // cerrar menú al elegir un enlace
+  menu?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      menu.classList.remove("flex");
+      toggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>
