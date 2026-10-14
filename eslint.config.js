@@ -7,4 +7,16 @@ export default [
   {
     ignores: ["dist/", ".astro/"],
   },
+  {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        fetch: "readonly",
+        AbortSignal: "readonly",
+        Buffer: "readonly",
+      },
+    },
+  },
 ];

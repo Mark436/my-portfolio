@@ -1,0 +1,17 @@
+---
+title: ""
+image?: string
+---
+<h2 class="font-mono text-2xl font-bold text-tracking-tight">
+  {title}
+</h2>
+
+{image && (
+  <div class="mt-3 flex items-center gap-2">
+    <img
+      src={image}
+      alt="Ilustración de {title}"
+      class="w-10 h-10 rounded-md object-cover"
+    />
+  </div>
+)}

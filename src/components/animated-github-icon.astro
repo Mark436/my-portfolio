@@ -1,0 +1,49 @@
+<style>
+  .icon {
+    width: 20px;
+    height: 20px;
+    overflow: visible;
+  }
+
+  .base,
+  .overlay {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .base {
+    stroke: #777;
+  }
+
+  .overlay {
+    stroke: #000;
+    stroke-dasharray: 110;
+    stroke-dashoffset: 110;
+    transition: stroke-dashoffset 0.7s ease;
+  }
+
+  .icon:hover .overlay {
+    stroke-dashoffset: 0;
+  }
+</style>
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  class="icon"
+  viewBox="0 0 24 24"
+  aria-label="GitHub"
+  role="img"
+>
+  <path
+    pathLength="100"
+    class="base"
+    d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"
+  ></path>
+  <path
+    pathLength="100"
+    class="overlay"
+    d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"
+  ></path>
+</svg>
