@@ -2,10 +2,10 @@
 import Image from "astro/components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 import imagen_perfil from "@/assets/perfil.jpg";
-import imagen_servicio from "@/assets/servicioSocial.png";
-import imagen_publicaciones from "@/assets/publicacionesIth.png";
-import imagen_edicion from "@/assets/edicionPython.png";
-import { cn } from "@/lib/utils.ts";
+import previewRegistroVeranos from "@/assets/proyectos/registro-veranos.png";
+import previewStudia from "@/assets/proyectos/registro-veranos.png";
+import PreviewDefault from "@/assets/proyectos/default.svg";
+import AnimatedGithubIcon from "@/components/animated-github-icon.astro";
 
 const INFO = [
   { label: "Rol", value: "Sistemas Computacionales" },
@@ -14,7 +14,6 @@ const INFO = [
   { label: "Enfoque", value: "Full-stack · Automatización" },
   { label: "Ubicación", value: "Hermosillo, MX" },
 ];
-const AVAILABLE = true;
 const CONTACT = {
   MAIL: "contacto@marcosochoa.dev?subject=Me%20interesa%20saber%20sobre",
   GITHUB: "mark436",
@@ -60,30 +59,30 @@ const SKILLS = {
 const PROYECTOS = [
   {
     id: "v3",
-    tag: "2026 · Sistema web y backend",
-    title: "PublicacionesITH",
-    desc: "Sistema para el departamento de comunicación de ITH que se encarga de facilitar el ingreso de la información para hacer publicaciones guardandolas en una base de datos que utiliza el tecnológico para despúes publicarlas, autenticado con supabase.",
-    image: imagen_publicaciones,
-    chips: ["Astro", "Sistema de diseño", "Supabase"],
-    github: "https://github.com/Mark436/publicaciones-ith",
-    preview: null,
+    tag: "2026 · Aplicación PWA",
+    title: "Studia",
+    desc: "Aplicación para consulta de datos academicos, horario, reticula, calificaciones, adeudos, progreso y avisos.",
+    image: previewStudia,
+    chips: ["React", "Tailwindcss", "Go"],
+    github: "https://github.com/mark436/studia",
+    preview: "https://studiaaa.netlify.app",
   },
   {
     id: "v2",
     tag: "2026 · Sistema web y backend",
-    title: "Registro de Veranos",
-    desc: "Sistema de registro para campamentos de verano en el ITH con Google Sheets como base de datos, autenticación con Google y una interfaz web para facilitar el registro.",
-    image: imagen_servicio,
-    chips: ["Google Apps Script", "OAuth", "Netlify"],
+    title: "Interfaz web para arduino",
+    desc: "Sistema para comunicarse con un arduino por puerto serial y también desde otro dispositivo vinculado através de internet en la misma sesión.",
+    image: previewRegistroVeranos,
+    chips: ["Html", "Javascript", "Css", "Go"],
     github: null,
-    preview: "/ejemplos/registroverano",
+    preview: "https://marcosochoa.dev/ejemplos/registroverano",
   },
   {
     id: "v1",
     tag: "2025 · Automatización",
     title: "Herramienta de edición de video",
     desc: "Herramienta de terminal en Python que elimina silencios de un video automáticamente utilizando subtitulos generados automaticamente para detectar los silencios y las partes importantes",
-    image: imagen_edicion,
+    image: null,
     chips: ["Python", "FFmpeg", "Whisper"],
     github: "https://github.com/Mark436/autoEdit",
     preview: null,
@@ -91,11 +90,19 @@ const PROYECTOS = [
 ];
 ---
 
+<style>
+  a:hover {
+    .icon .overlay {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
 <Layout title="Marcos Ochoa — Portfolio">
-  <main class="pt-24 sm:pt-36">
+  <main class="pt-18 sm:pt-18">
     <!-- ---------- HERO ---------- -->
     <section
       class="pb-24 border-b border-divider transition-colors duration-300"
+      id="hero"
     >
       <div class="max-w-4xl mx-auto px-8">
         <div class="mb-4">
@@ -106,21 +113,6 @@ const PROYECTOS = [
             loading="eager"
             fetchpriority="high"
           />
-        </div>
-
-        <div
-          class="flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-widest mb-3"
-        >
-          <span
-            class={cn(
-              "w-3 h-3 rounded-full ring-4",
-              AVAILABLE
-                ? "bg-active ring-active/20"
-                : "bg-unactive ring-unactive/20",
-            )}
-          >
-          </span>
-          Disponible para proyectos
         </div>
 
         <h1
@@ -134,8 +126,8 @@ const PROYECTOS = [
         >
           Desarrollador <strong class="text-blue-400 font-bold text-2xl"
             >full-stack</strong
-          > enfocado en sistemas web y automatización. Construyo la solución hecha
-          a medida para tu organización.
+          > enfocado en sistemas web y automatización. Construyo la solución a medida
+          para tu organización.
         </p>
 
         <div class="flex flex-wrap items-center gap-4">
@@ -161,18 +153,7 @@ const PROYECTOS = [
               aria-label="GitHub"
               class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-divider text-muted transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-main active:translate-y-0 active:shadow-sm"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                ><path
-                  d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"
-                ></path></svg
-              >
+              <AnimatedGithubIcon />
             </a>
           </div>
         </div>
@@ -209,12 +190,18 @@ const PROYECTOS = [
           PROYECTOS.map((proyecto) => (
             <article class="flex flex-col md:flex-row gap-8 lg:gap-12 fade-up-entry">
               <div class="w-full md:w-5/12 lg:w-1/2 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface">
-                <Image
-                  src={proyecto.image}
-                  alt={`Captura del proyecto ${proyecto.title}`}
-                  class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+                {proyecto.image ? (
+                  <Image
+                    src={proyecto.image}
+                    alt={`Captura del proyecto ${proyecto.title}`}
+                    class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full aspect-[8/5] overflow-hidden">
+                    <PreviewDefault class="w-full h-full hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
               </div>
 
               <div class="w-full md:w-7/12 lg:w-1/2 flex flex-col justify-center">
@@ -360,7 +347,10 @@ const PROYECTOS = [
     </section>
 
     <!-- ---------- SKILLS ---------- -->
-    <section id="skills" class="max-w-4xl mx-auto px-8 pt-12 pb-8 scroll-mt-24">
+    <section
+      id="skills"
+      class="max-w-4xl mx-auto px-8 pt-12 mb-10 sm:pb-8 scroll-mt-24"
+    >
       <div class="flex items-center gap-3 mb-12">
         <svg
           class="text-main"

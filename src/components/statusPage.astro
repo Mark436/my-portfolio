@@ -1,0 +1,114 @@
+---
+interface Props {
+  badge?: string;
+  code?: string;
+
+  title: string;
+  description: string;
+
+  endpoint?: string;
+  status: string;
+  message: string;
+  hint: string;
+
+  primaryHref?: string;
+  primaryText?: string;
+
+  secondaryHref?: string;
+  secondaryText?: string;
+}
+
+const {
+  badge,
+  code,
+
+  title,
+  description,
+
+  endpoint = "GET /pagina",
+  status,
+  message,
+  hint,
+
+  primaryHref = "/",
+  primaryText = "Volver al inicio",
+
+  secondaryHref,
+  secondaryText,
+} = Astro.props;
+---
+
+<main class="min-h-[80vh] flex items-center justify-center px-8">
+  <section class="max-w-3xl w-full text-center">
+    {
+      badge && (
+        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-400 ring-4 ring-blue-400/20" />
+          {badge}
+        </div>
+      )
+    }
+
+    {
+      code && (
+        <h1 class="font-mono text-7xl md:text-9xl font-bold tracking-tight text-main leading-none">
+          {code}
+        </h1>
+      )
+    }
+
+    <h2
+      class="mt-6 font-mono text-3xl md:text-4xl font-bold text-main tracking-tight"
+    >
+      {title}
+    </h2>
+
+    <p class="mt-6 text-lg text-muted leading-relaxed max-w-xl mx-auto">
+      {description}
+    </p>
+
+    <div
+      class="mt-12 bg-surface border border-divider rounded-2xl p-6 text-left max-w-lg mx-auto shadow-sm"
+    >
+      <p class="font-mono text-sm text-muted mb-4">
+        {endpoint}
+      </p>
+
+      <div
+        class="border-l-2 border-blue-400 pl-4 text-main font-mono text-sm space-y-2"
+      >
+        <p>
+          Status: <span class="text-blue-400">{status}</span>
+        </p>
+
+        <p>
+          Message: {message}
+        </p>
+
+        <p>
+          Hint: {hint}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
+      <a
+        href={primaryHref}
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 bg-primary text-primary-fg border-primary hover:opacity-90"
+      >
+        {primaryText}
+      </a>
+
+      {
+        secondaryHref && secondaryText && (
+          <a
+            href={secondaryHref}
+            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 bg-surface text-main border-divider hover:bg-bg"
+          >
+            {secondaryText}
+          </a>
+        )
+      }
+    </div>
+  </section>
+</main>

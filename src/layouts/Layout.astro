@@ -84,8 +84,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   >
     {
       no_nav === "false" && (
-        <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-          <div class="flex items-center p-1.5 bg-surface/80 backdrop-blur-xl border border-divider shadow-lg rounded-full transition-colors duration-300">
+        <nav
+          id="site-nav"
+          class="at-top fixed inset-x-0 top-0 z-50 flex justify-center"
+        >
+          <div
+            id="nav-bar"
+            class="flex items-center justify-center bg-surface/80 backdrop-blur-xl"
+          >
             <ul
               class="flex items-center gap-1 px-2 list-none m-0 p-0 text-center"
               id="nav-list"
@@ -154,40 +160,70 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       });
     </script>
     <script>
-      const nav = document.querySelector("nav");
+      const nav = document.getElementById("site-nav");
       const navLinks = Array.from(
         document.querySelectorAll<HTMLAnchorElement>("#nav-list a"),
       );
+
       const sections = navLinks
         .map((a) => document.querySelector(a.getAttribute("href") ?? ""))
-        .filter((el): el is HTMLElement => el !== null);
+        .filter((el) => el !== null);
 
       const clearActive = () =>
         navLinks.forEach((a) => a.classList.remove("active"));
 
-      const setActive = (id: string) => {
+      const setActive = (id) => {
         clearActive();
         navLinks
           .find((a) => a.getAttribute("href") === `#${id}`)
           ?.classList.add("active");
       };
 
-      // Flag para ignorar el observer mientras el scroll fue disparado por click
       let isManualNav = false;
-      let manualNavTimeout: ReturnType<typeof setTimeout>;
+      let manualNavTimeout;
+
+      const endManualNav = () => {
+        isManualNav = false;
+        clearTimeout(manualNavTimeout);
+        window.removeEventListener("scroll", onManualNavScroll);
+        window.removeEventListener("scrollend", endManualNav);
+      };
+
+      // El modo manual dura hasta que el scroll se detiene. Se apoya en
+      // scrollend y, como respaldo, en un timeout que se reinicia con cada
+      // scroll (o se dispara si no hubo ninguno). Así el observer retoma el
+      // control sin saltarse el scroll en curso.
+      const onManualNavScroll = () => {
+        clearTimeout(manualNavTimeout);
+        manualNavTimeout = setTimeout(endManualNav, 500);
+      };
+
+      // Banda central del viewport donde una sección se considera visible.
+      // Debe coincidir con el rootMargin del observer (-45% arriba y abajo).
+      const BAND_TOP = 0.55;
+      const BAND_BOTTOM = 0.45;
+
+      const sectionInBand = () =>
+        sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return (
+            rect.top < window.innerHeight * BAND_TOP &&
+            rect.bottom > window.innerHeight * BAND_BOTTOM
+          );
+        });
 
       const observer = new IntersectionObserver(
-        (entries) => {
-          if (isManualNav) return; // ignora el observer durante el scroll por click
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setActive(entry.target.id);
-          });
+        () => {
+          if (isManualNav) return;
+
+          const current = sectionInBand();
+          if (current) setActive(current.id);
+          else clearActive();
         },
         { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
       );
       sections.forEach((section) => observer.observe(section));
 
-      // Click en los links: activa de inmediato y bloquea el observer hasta que termine el scroll
       navLinks.forEach((link) => {
         link.addEventListener("click", () => {
           const id = link.getAttribute("href")?.replace("#", "");
@@ -196,39 +232,57 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           isManualNav = true;
           setActive(id);
 
-          clearTimeout(manualNavTimeout);
-
-          const onScrollEnd = () => {
-            isManualNav = false;
-            window.removeEventListener("scrollend", onScrollEnd);
-          };
-
-          if ("onscrollend" in window) {
-            window.addEventListener("scrollend", onScrollEnd);
-          } else {
-            // Fallback para navegadores sin soporte de scrollend (ej. Safari viejo)
-            manualNavTimeout = setTimeout(() => {
-              isManualNav = false;
-            }, 1000);
-          }
+          window.removeEventListener("scroll", onManualNavScroll);
+          window.addEventListener("scroll", onManualNavScroll, {
+            passive: true,
+          });
+          window.removeEventListener("scrollend", endManualNav);
+          window.addEventListener("scrollend", endManualNav);
+          onManualNavScroll();
         });
       });
 
-      // Estado "arriba" + deselección antes de la primera sección
-      const firstSection = document.getElementById("proyectos");
       const lastSection = sections[sections.length - 1];
+
+      const HEADER_COLLAPSE_AT = 64;
+      // Duración del morph, leída de --nav-morph para no duplicar el valor.
+      const _morph = nav
+        ? getComputedStyle(nav).getPropertyValue("--nav-morph")
+        : "";
+      const NAV_MORPH_MS =
+        _morph.includes("s") && !_morph.includes("ms")
+          ? Number.parseFloat(_morph) * 1000
+          : Number.parseFloat(_morph) || 500;
+
+      let headerExpanded = null;
+      let settleTimeout;
+
+      const setHeaderExpanded = (expanded) => {
+        if (expanded === headerExpanded) return;
+        headerExpanded = expanded;
+
+        nav?.classList.toggle("at-top", expanded);
+        clearTimeout(settleTimeout);
+
+        if (expanded) {
+          // Vuelve al header full-width: el selector se oculta y se
+          // deshabilitan sus transiciones de geometría.
+          nav?.classList.remove("nav-settled");
+        } else {
+          // Al convertirse en pill, el selector se habilita recién cuando el
+          // morph terminó, para que aparezca ya colocado (sin deslizarse).
+          settleTimeout = setTimeout(() => {
+            nav?.classList.add("nav-settled");
+          }, NAV_MORPH_MS);
+        }
+      };
 
       const handleTopState = () => {
         if (isManualNav) return;
 
-        const atTop = window.scrollY <= 0;
-        nav?.classList.toggle("at-top", atTop);
+        setHeaderExpanded(window.scrollY <= HEADER_COLLAPSE_AT);
 
-        const beforeFirstSection =
-          firstSection != null &&
-          window.scrollY < firstSection.offsetTop - window.innerHeight * 0.45;
-
-        if (atTop || beforeFirstSection) clearActive();
+        if (headerExpanded) clearActive();
 
         const scrolledToBottom =
           window.innerHeight + window.scrollY >=
@@ -244,28 +298,83 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </html>
 
 <style>
-  #nav-list {
-    anchor-name: --active, --hover;
+  /* ---------- Header: full-width arriba → pill al scrollear ---------- */
+  #site-nav {
+    --nav-morph: 400ms;
+    --nav-pad: 0.75rem; /* p-3 (header full-width) */
+    --nav-pill-pad: 0.375rem; /* p-1.5 (pill) */
+    /* padding físico: Safari no interpola bien los shorthands lógicos */
+    padding-top: 0;
+    padding-bottom: 0;
+    transition:
+      padding-top var(--nav-morph) cubic-bezier(0.4, 0, 0.2, 1),
+      padding-bottom var(--nav-morph) cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    & a:is(:not(.active)):hover {
+  #site-nav:not(.at-top) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* El ancho full-width ↔ pill se anima con flex-grow (número → número),
+     porque Safari no interpola bien max-width entre % y px. */
+  #nav-bar {
+    flex-grow: 1;
+    padding: var(--nav-pad);
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: var(--color-divider);
+    border-radius: 0;
+    box-shadow: 0 0 0 0 transparent;
+    transition:
+      flex-grow var(--nav-morph) cubic-bezier(0.4, 0, 0.2, 1),
+      padding var(--nav-morph) cubic-bezier(0.4, 0, 0.2, 1),
+      border-radius var(--nav-morph) cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 400ms ease,
+      box-shadow 400ms ease,
+      background-color 300ms ease;
+  }
+
+  #site-nav:not(.at-top) #nav-bar {
+    flex-grow: 0;
+    padding: var(--nav-pill-pad);
+    border-color: var(--color-divider);
+    border-radius: 999px;
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.18);
+  }
+
+  #nav-list a.active {
+    anchor-name: --active;
+    transition: color 300ms ease;
+    color: var(--color-accent);
+  }
+
+  /* El hover se limita a dispositivos con capacidad de hover (mismo criterio
+     que usan los `hover:` de Tailwind). En táctil el :hover queda "pegado"
+     tras el tap y el resaltado no desaparece hasta tocar otro elemento. */
+  @media (hover: hover) {
+    #nav-list a:not(.active):hover {
       anchor-name: --hover;
       color: var(--color-accent);
       transition: color 400ms ease;
     }
 
-    & a.active {
-      anchor-name: --active;
-      transition: color 300ms ease;
-      color: var(--color-accent);
+    #nav-list:has(a:not(.active):hover) #hover-indicator {
+      opacity: 1;
     }
   }
 
+  /* Sin sección activa el selector se oculta de inmediato y sin transición de
+     geometría: así, al aparecer, se coloca en su sitio sin deslizarse. */
+  #nav-list:not(:has(a.active)) #indicator {
+    opacity: 0;
+    transition: none;
+  }
+
   #indicator {
-    transition:
-      left 500ms ease,
-      top 500ms ease,
-      width 500ms ease,
-      height 500ms ease;
+    opacity: 0;
+    transition: opacity 200ms ease;
 
     position: absolute;
     position-anchor: --active;
@@ -285,6 +394,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     padding: 4px;
+  }
+
+  /* El selector de sección (y sus transiciones de geometría) se habilita recién
+     cuando el header terminó de convertirse en pill. */
+  #site-nav.nav-settled #indicator {
+    transition:
+      left var(--nav-morph) ease,
+      top var(--nav-morph) ease,
+      width var(--nav-morph) ease,
+      height var(--nav-morph) ease,
+      opacity 200ms ease;
+  }
+
+  #site-nav.nav-settled #nav-list:has(a.active) #indicator {
+    opacity: 1;
   }
 
   #hover-indicator {
@@ -311,9 +435,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     );
     border: 1px solid rgba(255, 255, 255, 0.048);
     opacity: 0;
-  }
-
-  #nav-list:has(a:not(.active):hover) #hover-indicator {
-    opacity: 1;
   }
 </style>
