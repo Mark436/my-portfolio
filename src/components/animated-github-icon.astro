@@ -1,9 +1,4 @@
 <style>
-  @media (prefers-color-scheme: dark) {
-    .overlay {
-      stroke: #fff;
-    }
-  }
   .icon {
     width: 20px;
     height: 20px;
@@ -21,7 +16,9 @@
   .base {
     stroke: #777;
   }
-
+  :global(.dark) .overlay {
+    stroke: #fff;
+  }
   .overlay {
     stroke: #000;
     stroke-dasharray: 110;
@@ -29,8 +26,6 @@
     transition: stroke-dashoffset 0.7s ease;
   }
 
-  /* La animación se dispara al entrar a toda la tarjeta (el enlace que
-     contiene el ícono), no solo al pasar por encima del propio SVG. */
   :global(a:hover) .overlay,
   :global(a:focus-visible) .overlay,
   .icon:hover .overlay {
