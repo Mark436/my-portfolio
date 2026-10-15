@@ -5,9 +5,9 @@ import previewInterfazLED from "@/assets/proyectos/interfazLED.png";
 export const PROYECTOS: Project[] = [
   {
     id: "v3",
-    tag: "2026 · Aplicación PWA",
+    tag: "2026 · Aplicación PWA, Funciones de automatización",
     title: "Studia",
-    desc: "Aplicación para consulta de datos academicos, horario, reticula, calificaciones, adeudos, progreso y avisos.",
+    desc: "Aplicación para consulta de datos academicos, horario, horarios automatizados, reticula, calificaciones, adeudos, progreso y avisos.",
     image: previewStudia,
     chips: ["React", "Tailwindcss", "Go"],
     github: "https://github.com/mark436/studia",
