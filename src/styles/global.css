@@ -54,33 +54,12 @@
   }
 }
 
-/* ---------- Capturas claras en modo oscuro ----------
-   Las apps todavía no tienen captura en modo oscuro, así que atenuamos la
-   imagen y fundimos sus bordes con la superficie de la tarjeta para que el
-   contraste no golpee la vista. El SVG no lo necesita: ya trae variantes
-   para ambos temas. */
-.media-shot {
-  transition:
-    filter 0.35s ease,
-    opacity 0.35s ease;
-}
-
+/* ---------- Modo oscuro: el dimming sutil ----------
+   Las capturas son claras y se atenuan sobre el fondo oscuro. El SVG ya
+   trae sus variantes de modo oscuro, así que esto aplica solo a los PNG. */
 .dark .media-shot {
   filter: brightness(0.92) contrast(1.03) saturate(0.95);
   opacity: 0.97;
-  -webkit-mask-image: radial-gradient(
-    135% 135% at 50% 45%,
-    #000 70%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    135% 135% at 50% 45%,
-    #000 70%,
-    transparent 100%
-  );
-  transition:
-    filter 0.35s ease,
-    opacity 0.35s ease;
 }
 
 /* Animación de entrada para los proyectos */
