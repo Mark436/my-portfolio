@@ -1,0 +1,37 @@
+---
+interface Props {
+  status?: "done" | "wip";
+  progress?: number | null;
+}
+
+const { status, progress } = Astro.props;
+const isWip = status === "wip";
+const pct = Math.round(Math.min(100, Math.max(0, progress ?? 0)));
+---
+
+{
+  isWip && (
+    <div class="inline-flex flex-wrap items-center gap-3">
+      <span class="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-medium text-amber-700 dark:text-amber-400">
+        <span class="relative flex size-2" aria-hidden="true">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-500 opacity-60" />
+          <span class="relative inline-flex size-2 rounded-full bg-amber-500" />
+        </span>
+        En desarrollo · {pct}%
+      </span>
+      <span
+        class="h-1.5 w-16 overflow-hidden rounded-full bg-divider"
+        role="progressbar"
+        aria-label="Progreso del proyecto"
+        aria-valuenow={pct}
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <span
+          class="block h-full rounded-full bg-amber-500 transition-[width] duration-700 ease-out"
+          style={`width:${pct}%`}
+        />
+      </span>
+    </div>
+  )
+}

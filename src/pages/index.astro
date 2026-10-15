@@ -1,102 +1,15 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import imagen_perfil from "@/assets/perfil.jpg";
-import previewRegistroVeranos from "@/assets/proyectos/registro-veranos.png";
-import previewStudia from "@/assets/proyectos/registro-veranos.png";
-import PreviewDefault from "@/assets/proyectos/default.svg";
 import AnimatedGithubIcon from "@/components/animated-github-icon.astro";
-
-const INFO = [
-  { label: "Rol", value: "Sistemas Computacionales" },
-  { label: "Institución", value: "ITH" },
-  { label: "Stack", value: "React · Supabase · Node" },
-  { label: "Enfoque", value: "Full-stack · Automatización" },
-  { label: "Ubicación", value: "Hermosillo, MX" },
-];
-const CONTACT = {
-  MAIL: "contacto@marcosochoa.dev?subject=Me%20interesa%20saber%20sobre",
-  GITHUB: "mark436",
-};
-
-const SKILLS = {
-  Frontend: [
-    "React",
-    "Astro",
-    "Vite",
-    "Tailwind CSS",
-    "HTML",
-    "CSS",
-    "JavaScript",
-  ],
-
-  Backend: [
-    "Node.js",
-    "NestJS",
-    "Supabase",
-    "Netlify Functions",
-    "Google Apps Script",
-  ],
-
-  "Bases De Datos": ["PostgreSQL", "MySQL"],
-
-  //  DevOps: ["Docker", "Git", "GitHub"],
-
-  //  Sistemas: ["NASM x86-64", "FFmpeg"],
-
-  Lenguajes: [
-    "JavaScript",
-    "TypeScript",
-    "Python",
-    "Java",
-    "Rust",
-    "Haskell",
-    "Prolog",
-    "C#",
-  ],
-};
-
-const PROYECTOS = [
-  {
-    id: "v3",
-    tag: "2026 · Aplicación PWA",
-    title: "Studia",
-    desc: "Aplicación para consulta de datos academicos, horario, reticula, calificaciones, adeudos, progreso y avisos.",
-    image: previewStudia,
-    chips: ["React", "Tailwindcss", "Go"],
-    github: "https://github.com/mark436/studia",
-    preview: "https://studiaaa.netlify.app",
-  },
-  {
-    id: "v2",
-    tag: "2026 · Sistema web y backend",
-    title: "Interfaz web para arduino",
-    desc: "Sistema para comunicarse con un arduino por puerto serial y también desde otro dispositivo vinculado através de internet en la misma sesión.",
-    image: previewRegistroVeranos,
-    chips: ["Html", "Javascript", "Css", "Go"],
-    github: null,
-    preview: "https://marcosochoa.dev/ejemplos/registroverano",
-  },
-  {
-    id: "v1",
-    tag: "2025 · Automatización",
-    title: "Herramienta de edición de video",
-    desc: "Herramienta de terminal en Python que elimina silencios de un video automáticamente utilizando subtitulos generados automaticamente para detectar los silencios y las partes importantes",
-    image: null,
-    chips: ["Python", "FFmpeg", "Whisper"],
-    github: "https://github.com/Mark436/autoEdit",
-    preview: null,
-  },
-];
+import ProjectCard from "@/components/ProjectCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { CONTACT, INFO } from "@/data/site";
+import { SKILLS } from "@/data/skills";
+import { PROYECTOS } from "@/data/projects";
 ---
 
-<style>
-  a:hover {
-    .icon .overlay {
-      stroke-dashoffset: 0;
-    }
-  }
-</style>
 <Layout title="Marcos Ochoa — Portfolio">
   <main class="pt-18 sm:pt-18">
     <!-- ---------- HERO ---------- -->
@@ -150,6 +63,7 @@ const PROYECTOS = [
             <a
               href={`https://github.com/${CONTACT.GITHUB}`}
               target="_blank"
+              rel="noreferrer"
               aria-label="GitHub"
               class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-divider text-muted transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-main active:translate-y-0 active:shadow-sm"
             >
@@ -165,7 +79,7 @@ const PROYECTOS = [
       id="proyectos"
       class="max-w-4xl mx-auto px-8 pt-24 pb-12 scroll-mt-24"
     >
-      <div class="flex items-center gap-3 mb-16">
+      <SectionHeading title="Proyectos" class="mb-16">
         <svg
           class="text-main"
           xmlns="http://www.w3.org/2000/svg"
@@ -180,99 +94,10 @@ const PROYECTOS = [
           ><polyline points="16 18 22 12 16 6"></polyline><polyline
             points="8 6 2 12 8 18"></polyline></svg
         >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Proyectos
-        </h2>
-      </div>
+      </SectionHeading>
 
       <div class="flex flex-col gap-16 md:gap-24 border-b border-divider pb-24">
-        {
-          PROYECTOS.map((proyecto) => (
-            <article class="flex flex-col md:flex-row gap-8 lg:gap-12 fade-up-entry">
-              <div class="w-full md:w-5/12 lg:w-1/2 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface">
-                {proyecto.image ? (
-                  <Image
-                    src={proyecto.image}
-                    alt={`Captura del proyecto ${proyecto.title}`}
-                    class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="w-full aspect-[8/5] overflow-hidden">
-                    <PreviewDefault class="w-full h-full hover:scale-105 transition-transform duration-500" />
-                  </div>
-                )}
-              </div>
-
-              <div class="w-full md:w-7/12 lg:w-1/2 flex flex-col justify-center">
-                <span class="font-mono text-sm text-muted mb-2 inline-block">
-                  {proyecto.tag}
-                </span>
-
-                <h3 class="text-2xl md:text-3xl font-bold mb-4 text-main tracking-tight">
-                  {proyecto.title}
-                </h3>
-
-                <div class="flex flex-wrap gap-2 mb-6">
-                  {proyecto.chips.map((chip) => (
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-divider bg-surface text-main shadow-sm">
-                      {chip}
-                    </span>
-                  ))}
-                </div>
-
-                <p class="text-muted text-base md:text-lg mb-8 leading-relaxed">
-                  {proyecto.desc}
-                </p>
-
-                <div class="flex flex-wrap gap-3 mt-auto">
-                  {proyecto.github && (
-                    <a
-                      href={proyecto.github}
-                      target="_blank"
-                      class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4" />
-                      </svg>
-                      Code
-                    </a>
-                  )}
-                  {proyecto.preview && (
-                    <a
-                      href={proyecto.preview}
-                      target="_blank"
-                      class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-sans text-sm font-medium transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm bg-surface text-main border-divider hover:bg-bg"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                      Preview
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))
-        }
+        {PROYECTOS.map((proyecto) => <ProjectCard project={proyecto} />)}
       </div>
     </section>
 
@@ -281,7 +106,7 @@ const PROYECTOS = [
       id="sobre-mi"
       class="max-w-4xl mx-auto px-8 pt-12 pb-12 scroll-mt-24"
     >
-      <div class="flex items-center gap-3 mb-12">
+      <SectionHeading title="Sobre mí" class="mb-12">
         <svg
           class="text-main"
           xmlns="http://www.w3.org/2000/svg"
@@ -298,10 +123,7 @@ const PROYECTOS = [
             cy="7"
             r="4"></circle></svg
         >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Sobre mí
-        </h2>
-      </div>
+      </SectionHeading>
 
       <div class="flex flex-col md:flex-row gap-12 lg:gap-16 fade-up-entry">
         <!-- Texto Descriptivo -->
@@ -351,7 +173,7 @@ const PROYECTOS = [
       id="skills"
       class="max-w-4xl mx-auto px-8 pt-12 mb-10 sm:pb-8 scroll-mt-24"
     >
-      <div class="flex items-center gap-3 mb-12">
+      <SectionHeading title="Skills & Herramientas" class="mb-12">
         <svg
           class="text-main"
           xmlns="http://www.w3.org/2000/svg"
@@ -369,10 +191,7 @@ const PROYECTOS = [
             x2="20"
             y2="19"></line></svg
         >
-        <h2 class="font-mono text-2xl font-bold m-0 text-main tracking-tight">
-          Skills & Herramientas
-        </h2>
-      </div>
+      </SectionHeading>
 
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-up-entry"

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* El tema se alterna con la clase `.dark` en <html> (los tokens --theme-*
+   cambian), no con `prefers-color-scheme`. Esto habilita el variant `dark:`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Al usar --color-*, Tailwind crea bg-bg, text-main, border-divider, etc. */
   --color-bg: var(--theme-bg);
@@ -38,7 +42,7 @@
     --theme-border: #27272a;
     --theme-primary: #f4f4f5;
     --theme-primary-fg: #09090b;
-    --theme-accent: #fffc41; /* Amarillo */
+    --theme-accent: #84cc16; /* Verde lima (con glow en oscuro) */
   }
 
   body {
@@ -48,6 +52,33 @@
       background-color 0.3s ease,
       color 0.3s ease;
   }
+}
+
+/* ---------- Capturas claras en modo oscuro ----------
+   Las apps todavía no tienen captura en modo oscuro, así que atenuamos la
+   imagen y fundimos sus bordes con la superficie de la tarjeta para que el
+   contraste no golpee la vista. El SVG no lo necesita: ya trae variantes
+   para ambos temas. */
+.media-shot {
+  transition:
+    filter 0.35s ease,
+    opacity 0.35s ease,
+    transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .media-shot {
+  filter: brightness(0.8) contrast(1.03) saturate(0.92);
+  opacity: 0.94;
+  -webkit-mask-image: radial-gradient(
+    135% 135% at 50% 45%,
+    #000 62%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    135% 135% at 50% 45%,
+    #000 62%,
+    transparent 100%
+  );
 }
 
 /* Animación de entrada para los proyectos */

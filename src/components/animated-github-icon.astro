@@ -24,6 +24,10 @@
     transition: stroke-dashoffset 0.7s ease;
   }
 
+  /* La animación se dispara al entrar a toda la tarjeta (el enlace que
+     contiene el ícono), no solo al pasar por encima del propio SVG. */
+  :global(a:hover) .overlay,
+  :global(a:focus-visible) .overlay,
   .icon:hover .overlay {
     stroke-dashoffset: 0;
   }

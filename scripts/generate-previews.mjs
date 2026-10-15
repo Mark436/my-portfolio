@@ -69,13 +69,17 @@ async function capture(url, { full }) {
   const payload = await response.json();
   const screenshot = payload?.data?.screenshot;
   if (!payload?.success || !screenshot) {
-    throw new Error(`respuesta sin screenshot: ${JSON.stringify(payload).slice(0, 300)}`);
+    throw new Error(
+      `respuesta sin screenshot: ${JSON.stringify(payload).slice(0, 300)}`,
+    );
   }
   return typeof screenshot === "string" ? screenshot : screenshot.url;
 }
 
 async function download(imageUrl) {
-  const response = await fetch(imageUrl, { signal: AbortSignal.timeout(120000) });
+  const response = await fetch(imageUrl, {
+    signal: AbortSignal.timeout(120000),
+  });
   if (!response.ok) {
     throw new Error(`descarga ${response.status}`);
   }
@@ -101,7 +105,9 @@ async function main() {
     const file = path.join(OUTPUT_DIR, `${site.slug}.png`);
 
     if (!options.force && (await exists(file))) {
-      console.log(`skip   ${site.slug} -> ya existe (usa --force para reemplazar)`);
+      console.log(
+        `skip   ${site.slug} -> ya existe (usa --force para reemplazar)`,
+      );
       results.skipped.push(site.slug);
       continue;
     }
@@ -111,7 +117,9 @@ async function main() {
       const shotUrl = await capture(site.url, options);
       const bytes = await download(shotUrl);
       await writeFile(file, bytes);
-      console.log(`ok     ${site.slug} (${(bytes.length / 1024).toFixed(0)} KB)`);
+      console.log(
+        `ok     ${site.slug} (${(bytes.length / 1024).toFixed(0)} KB)`,
+      );
       results.created.push(site.slug);
     } catch (error) {
       console.error(`error  ${site.slug}: ${error.message}`);
