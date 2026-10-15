@@ -22,5 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+grid.svg
+*.tar.gz
+*.zip
 
 _spck*
