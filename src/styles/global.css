@@ -16,6 +16,8 @@
   --color-accent: var(--theme-accent);
   --color-active: var(--theme-active);
   --color-unactive: var(--theme-unactive);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 }
 
 @layer base {

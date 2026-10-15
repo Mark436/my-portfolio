@@ -11,7 +11,7 @@ export const PROYECTOS: Project[] = [
     image: previewStudia,
     chips: ["React", "Tailwindcss", "Go"],
     github: "https://github.com/mark436/studia",
-    preview: "https://studiaaa.netlify.app",
+    preview: "https://studiaaa.netlify.app/?demo",
   },
   {
     id: "v2",
