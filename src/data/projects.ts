@@ -4,7 +4,7 @@ import previewInterfazLED from "@/assets/proyectos/interfazLED.png";
 
 export const PROYECTOS: Project[] = [
   {
-    id: "v3",
+    id: "v5",
     tag: "2026 · Aplicación PWA, Funciones de automatización",
     title: "Studia",
     desc: "Aplicación para consulta de datos academicos, horario, horarios automatizados, reticula, calificaciones, adeudos, progreso y avisos.",
@@ -13,6 +13,28 @@ export const PROYECTOS: Project[] = [
     github: "https://github.com/mark436/studia",
     preview: "https://studiaaa.netlify.app/?demo",
   },
+/*
+  {
+    id: "v4",
+    tag: "2026 · Aplicación PWA, Funciones de automatización",
+    title: "Seña",
+    desc: "Aplicación para traducir lenguaje de señas a texto/voz",
+    image: null,
+    chips: ["React", "Tailwindcss", "Go"],
+    github: "https://github.com/mark436/studia",
+    preview: "https://studiaaa.netlify.app/?demo",
+  },
+  {
+    id: "v3",
+    tag: "2026 · Aplicación PWA, Funciones de automatización",
+    title: "FileR",
+    desc: "Aplicacion para transferir archivos por qr",
+    image: null,
+    chips: ["React", "Tailwindcss", "Go"],
+    github: "https://github.com/mark436/studia",
+    preview: "https://studiaaa.netlify.app/?demo",
+  },
+*/
   {
     id: "v2",
     tag: "2026 · Sistema web y backend",
