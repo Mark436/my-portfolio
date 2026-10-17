@@ -21,7 +21,7 @@ export const PROYECTOS: Project[] = [
     image: previewInterfazLED,
     chips: ["Html", "Javascript", "Css", "Go"],
     github: "https://github.com/Mark436/boton-arduino-led-example",
-    preview: "https://led.marcosochoa.dev",
+    preview: "https://led.marcosochoa.dev?demo",
   },
   {
     id: "v1",
